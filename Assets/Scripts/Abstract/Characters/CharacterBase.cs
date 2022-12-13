@@ -15,7 +15,12 @@ public abstract class CharacterBase : DamageableObject, IFixedUpdatable
         if (_healthBar != null) _healthBar.UpdateHealth();
     }
 
-    public abstract void Move(Vector3 direction);
+    public virtual void Move(Vector3 direction)
+    {
+        Vector3 pos = transform.position;
+
+        transform.position = Vector3.MoveTowards(pos, pos + direction * Stats.Velocity.Value, Stats.Velocity.Value * Time.fixedDeltaTime);
+    }
 
     protected abstract void Attack();
 

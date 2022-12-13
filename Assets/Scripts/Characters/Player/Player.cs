@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : CharacterBase
 {
     [Header("Stats settings")]
-    [SerializeField] protected List<Weapon> _startWeaponsList;
     [SerializeField] protected CharacterStats _stats;
 
     [Header("Inventory settings")]
@@ -53,8 +52,6 @@ public class Player : CharacterBase
             weapon.OnFixedUpdate();
         }
     }
-
-    public override void Move(Vector3 direction) { }
 
     protected override void Attack()
     {

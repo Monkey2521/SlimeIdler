@@ -21,7 +21,6 @@ public abstract class UIMenu : MonoBehaviour
         _mainMenu = mainMenu;
         _parentMenu = parentMenu;
 
-        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         _animator.cullingMode = AnimatorCullingMode.CullCompletely;
     }
     public virtual void Display(bool playAnimation = false)

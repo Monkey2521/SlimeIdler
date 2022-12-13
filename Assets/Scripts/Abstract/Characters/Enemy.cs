@@ -39,18 +39,6 @@ public abstract class Enemy : CharacterBase, IPoolable, IUpdatable
         Attack();
     }
 
-    public override void OnFixedUpdate()
-    {
-        base.OnFixedUpdate();
-    }
-
-    public override void Move(Vector3 direction)
-    {
-        Vector3 pos = transform.position;
-
-        transform.position = Vector3.MoveTowards(pos, pos + direction * _stats.Velocity.Value, _stats.Velocity.Value * Time.fixedDeltaTime);
-    }
-
     protected override void Attack()
     {
         _stats.BaseWeapon.OnUpdate();
