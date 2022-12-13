@@ -8,7 +8,6 @@ public class TagList
 
     public bool Contains(Tags tag) => _tags.Contains(tag);
 
-
     public bool Contains(string tag)
     {
         foreach (Tags t in _tags)

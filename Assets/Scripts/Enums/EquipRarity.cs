@@ -3,7 +3,6 @@
     Common,
     Uncommon,
     Rare,
-    Excellent,
-    Epic,
-    Superior
+    Mythical,
+    Legendary
 }

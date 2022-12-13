@@ -2,7 +2,6 @@
 {
     Music,
     UI,
-    Character, // moving or taking damage
+    Character,
     Weapon,
-    PickableObject
 }

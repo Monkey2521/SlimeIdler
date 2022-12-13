@@ -10,10 +10,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] protected UIMenu _defaultMenu;
     [SerializeField] protected List<UIMenu> _menus;
 
-    [SerializeField] private SettingsMenu _settings;
-
-    [Space(5)]
-    [SerializeField] private RewardsInfo _rewardsInfo;
     [SerializeField] private PopupMessage _message;
      
     protected virtual void OnEnable()
@@ -30,8 +26,6 @@ public class MainMenu : MonoBehaviour
             else menu.Hide();
         }
 
-        _settings?.Initialize();
-        _rewardsInfo?.Hide();
         _message?.Hide();
     }
 
@@ -53,36 +47,11 @@ public class MainMenu : MonoBehaviour
         Display(_defaultMenu);
     }
 
-    public void OnSettingsClick()
-    {
-        _settings?.Display(true);
-    }
-    
-    public void OnSettingsClose()
-    {
-        _settings?.Hide(true);
-    }
-
-    public void OnBuyEnergyClick()
-    {
-
-    }
-
-    public void OnBuyGemsClick()
-    {
-
-    }
-
-    public void OnBuyGoldClick()
-    {
-
-    }
-
-    public void ShowRewards(List<Reward> rewards)
+    /*public void ShowRewards(List<Reward> rewards)
     {
         _rewardsInfo.ShowReward(rewards);
         _rewardsInfo.Display(true);
-    }
+    }*/
 
     public void ShowPopupMessage(string message)
     {

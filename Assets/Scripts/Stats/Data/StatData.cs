@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "ZombieSurvival/Stats/StatData", fileName = "New StatData")]
+[CreateAssetMenu(menuName = "SlimeIdler/Stats/StatData", fileName = "New StatData")]
 public class StatData : ScriptableObject
 {
     [Header("Value settings")]

@@ -9,13 +9,7 @@ public class UpgradeList
     private float _upgradesMultiplier;
 
     public List<UpgradeData> Upgrades => _upgrades;
-    /// <summary>
-    /// Total value of the improvements
-    /// </summary>
     public float UpgradesValue => _upgradesValue;
-    /// <summary>
-    /// Total multiplier of the improvements
-    /// </summary>
     public float UpgradesMultiplier => _upgradesMultiplier;
 
     public UpgradeList()
@@ -26,10 +20,6 @@ public class UpgradeList
         _upgradesMultiplier = 1;
     }
 
-    /// <summary>
-    /// Add new upgrade
-    /// </summary>
-    /// <param name="upgrade"></param>
     public void Add(UpgradeData upgrade)
     {
         _upgrades.Add(upgrade);
@@ -37,11 +27,6 @@ public class UpgradeList
         CalculateUpgrades();
     }
 
-    /// <summary>
-    /// Dispel one upgrade
-    /// </summary>
-    /// <param name="upgrade">Upgrade need to dispel</param>
-    /// <returns>Dispel is done</returns>
     public bool Dispel(UpgradeData upgrade)
     {
         if (_upgrades.Remove(upgrade))
@@ -53,9 +38,6 @@ public class UpgradeList
         else return false;
     }
 
-    /// <summary>
-    /// Dispel all upgrades
-    /// </summary>
     public void DispelAll()
     {
         _upgrades.Clear();
@@ -63,9 +45,6 @@ public class UpgradeList
         CalculateUpgrades();
     }
 
-    /// <summary>
-    /// Calculate total upgrades values
-    /// </summary>
     private void CalculateUpgrades()
     {
         float value = 0, multiplier = 1;

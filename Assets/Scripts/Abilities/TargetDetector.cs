@@ -129,42 +129,6 @@ public class TargetDetector : TriggerDetector, IObjectDisableHandler
         return (position - transform.position).normalized;
     }
 
-    public Vector3 GetFarthestTargetPosition()
-    {
-        Cleanup();
-
-        if (_targets.Count == 0) return -Vector3.one;
-
-        float maxMagnitude = (_targets[0].transform.position - transform.position).magnitude;
-        int maxIndex = 0;
-
-        for (int i = 1; i < _targets.Count; i++)
-        {
-            float magnitude = (_targets[i].transform.position - transform.position).magnitude;
-            if (magnitude > maxMagnitude)
-            {
-                maxIndex = i;
-                maxMagnitude = magnitude;
-            }
-        }
-
-        return _targets[maxIndex].transform.position;
-    }
-
-    public Vector3 GetDirectionToFarthestTarget()
-    {
-        Vector3 position = GetFarthestTargetPosition();
-
-        if (position == -Vector3.one)
-        {
-            return transform.TransformDirection(Vector3.forward);
-        }
-
-        position.y = transform.position.y;
-
-        return (position - transform.position).normalized;
-    }
-
     public Vector3 GetRandomTargetPosition()
     {
         Cleanup();
@@ -172,19 +136,5 @@ public class TargetDetector : TriggerDetector, IObjectDisableHandler
         if (_targets.Count == 0) return -Vector3.one;
 
         return _targets[Random.Range(0, _targets.Count)].transform.position;
-    }
-
-    public Vector3 GetDirectionToRandomTarget()
-    {
-        Vector3 position = GetRandomTargetPosition();
-
-        if (position == -Vector3.one)
-        {
-            return transform.TransformDirection(Vector3.forward);
-        }
-
-        position.y = transform.position.y;
-
-        return (position - transform.position).normalized;
     }
 }

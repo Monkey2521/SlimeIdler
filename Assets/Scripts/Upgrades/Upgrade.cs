@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ZombieSurvival/Upgrades/Upgrade", fileName = "New upgrade")]
+[CreateAssetMenu(menuName = "SlimeIdler/Upgrades/Upgrade", fileName = "New upgrade")]
 public class Upgrade : ScriptableObject
 {
     [SerializeField] private bool _isAbilityUpgrade;
@@ -44,11 +44,24 @@ public class Upgrade : ScriptableObject
         List<UpgradeData> datas = new List<UpgradeData>();
 
         datas.AddRange(upgrade.Upgrades);
+        
         if (data != null)
         {
             datas.Add(data);
         }
 
         return new Upgrade(data);
+    }
+
+    public static Upgrade operator *(Upgrade upgrade, int multiplier)
+    {
+        List<UpgradeData> data = new List<UpgradeData>();
+
+        foreach(UpgradeData uData in upgrade._upgrades)
+        {
+            data.Add(uData * multiplier);
+        }
+
+        return new Upgrade(data, upgrade._abilityMarker, upgrade._isAbilityUpgrade);
     }
 }

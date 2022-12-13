@@ -6,7 +6,7 @@ public abstract class ProjectileWeapon : Weapon, IFixedUpdatable
     [SerializeField][Range(0, 2)] protected float _scatterMultiplier;
     [SerializeField] protected ProjectileAbilityStats _stats;
 
-    protected ObjectSpawner<Projectile> _projectilePool;
+    protected MonoPool<Projectile> _projectilePool;
 
     protected float _spawnIntervalTimer;
     protected bool _spawning;
@@ -18,7 +18,7 @@ public abstract class ProjectileWeapon : Weapon, IFixedUpdatable
     {
         base.Initialize();
 
-        _projectilePool = new ObjectSpawner<Projectile>(_stats.Projectile, (int)_stats.ProjectileNumber.Value);
+        _projectilePool = new MonoPool<Projectile>(_stats.Projectile, (int)_stats.ProjectileNumber.Value);
 
         _spawnCount = 0;
         _spawnIntervalTimer = _stats.ProjectilesSpawnInterval.Value;
@@ -30,18 +30,6 @@ public abstract class ProjectileWeapon : Weapon, IFixedUpdatable
         if (_isReady)
         {
             base.Attack();
-
-            if (_stats.DestroyProjectilesOnAttack)
-            {
-                _projectilePool.SpawnedObjects.Cleanup();
-
-                for (int i = 0; i < _projectilePool.SpawnCount; i++)
-                {
-                    _projectilePool.Release(_projectilePool.SpawnedObjects[i]);
-                }
-
-                _projectilePool.SpawnedObjects.Cleanup();
-            }
 
             _isReady = false;
             _spawning = true;
@@ -69,26 +57,23 @@ public abstract class ProjectileWeapon : Weapon, IFixedUpdatable
 
     public virtual void OnFixedUpdate()
     {
-        for (int i = 0; i < _projectilePool.SpawnCount; i++)
-        {
-            _projectilePool.SpawnedObjects[i]?.OnFixedUpdate();
-        }
 
-        _projectilePool.SpawnedObjects.Cleanup();
     }
 
     protected virtual void SpawnProjectile()
     {
-        Projectile projectile = _projectilePool.SpawnDisabled(GetProjectilePosition());
-        
+        Projectile projectile = _projectilePool.PullDisabled();
+        projectile.transform.position = GetProjectilePosition();
+
         projectile.Initialize(_stats, this);
         projectile.Throw(GetProjectileMoveDirection());
+
         projectile.gameObject.SetActive(true);
 
         _spawnIntervalTimer = _stats.ProjectilesSpawnInterval.Value;
         _spawnCount++;
 
-        _sounds.PlaySound(SoundTypes.Shoot);
+        _sounds.PlaySound(SoundTypes.Attack);
 
         if (_spawnCount >= (int)_stats.ProjectileNumber.Value)
         {
@@ -105,17 +90,7 @@ public abstract class ProjectileWeapon : Weapon, IFixedUpdatable
 
     protected virtual Vector3 GetProjectileMoveDirection()
     {
-        return transform.TransformDirection(Vector3.forward) + GetDeltaMoveDirection();
-    }
-
-    protected virtual Vector3 GetDeltaMoveDirection()
-    {
-        return new Vector3
-            (
-                Random.Range(-_scatterMultiplier, _scatterMultiplier),
-                0f,
-                Random.Range(-_scatterMultiplier, _scatterMultiplier)
-            );
+        return _targetDetector.GetDirectionToNearestTarget();
     }
 
     public virtual void OnProjectileRelease(Projectile projectile)

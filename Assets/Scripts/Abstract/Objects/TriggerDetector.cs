@@ -7,7 +7,7 @@ public abstract class TriggerDetector : MonoBehaviour
     [SerializeField] protected bool _isDebug;
 
     [Header("Settings")]
-    [SerializeField] protected SphereCollider _collider;
+    [SerializeField] protected BoxCollider2D _collider;
     [SerializeField] protected TagList _triggerTags;
 
     protected Radius _radius;
@@ -26,7 +26,7 @@ public abstract class TriggerDetector : MonoBehaviour
     {
         if (_radius != null)
         {
-            _collider.radius = _radius.Value;
+            _collider.size = new Vector2(_radius.Value, _radius.Value);
         }
     }
 
