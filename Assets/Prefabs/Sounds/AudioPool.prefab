@@ -45,23 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3779bd49e10a95842885b70d0b6b46fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDebug: 0
-  _masterVolume: 0
+  _isDebug: 1
+  _masterVolume: 1
   _musicPlayer: {fileID: 1931755572906917417}
   _playerPrefab: {fileID: 5034926643934950030, guid: 082636f7123ae6144aa6e4b0532efaed, type: 3}
   _mixers:
     _mixerTypes:
     - _mixerType: 0
-      _mixer: {fileID: 0}
+      _mixer: {fileID: -7618739160698901598, guid: df35794a78706b1449201118ad113587, type: 2}
       _soundsCountLimit: 1
     - _mixerType: 1
-      _mixer: {fileID: 0}
+      _mixer: {fileID: 2437509881047013189, guid: df35794a78706b1449201118ad113587, type: 2}
       _soundsCountLimit: 5
     - _mixerType: 2
-      _mixer: {fileID: 0}
+      _mixer: {fileID: 650890163039538328, guid: df35794a78706b1449201118ad113587, type: 2}
       _soundsCountLimit: 10
     - _mixerType: 3
-      _mixer: {fileID: 0}
+      _mixer: {fileID: -4099884217263619201, guid: df35794a78706b1449201118ad113587, type: 2}
       _soundsCountLimit: 10
 --- !u!1001 &6596102305265786318
 PrefabInstance:

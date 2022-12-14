@@ -57,7 +57,12 @@ public abstract class ProjectileWeapon : Weapon, IFixedUpdatable
 
     public virtual void OnFixedUpdate()
     {
+        for (int i = 0; i < _projectilePool.PulledObjects.Count; i++)
+        {
+            _projectilePool.PulledObjects[i]?.OnFixedUpdate();
+        }
 
+        _projectilePool.PulledObjects.Cleanup();
     }
 
     protected virtual void SpawnProjectile()

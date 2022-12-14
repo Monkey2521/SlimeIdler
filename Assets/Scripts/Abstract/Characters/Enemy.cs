@@ -3,13 +3,11 @@ using UnityEngine;
 public abstract class Enemy : CharacterBase, IPoolable, IUpdatable
 {
     [Header("Enemy settings")]
-    [SerializeField] protected CapsuleCollider _selfCollider;
     [SerializeField] protected CharacterStats _stats;
 
     protected Player _player = null; 
     protected MonoPool<Enemy> _pool = null;
 
-    public CapsuleCollider Collider => _selfCollider;
     public override CharacterStats Stats => _stats;
 
     protected void Awake()

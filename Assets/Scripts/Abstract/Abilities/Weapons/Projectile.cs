@@ -16,8 +16,11 @@ public class Projectile : MonoBehaviour, IPoolable, IFixedUpdatable
     protected ProjectileSpeed _speed;
     protected Damage _damage;
     protected Radius _attackRange;
+    protected Duration _lifeDuration;
 
     protected ProjectileWeapon _weapon;
+
+    protected float _releaseTimer;
 
     public virtual void ResetObject()
     {
@@ -37,6 +40,7 @@ public class Projectile : MonoBehaviour, IPoolable, IFixedUpdatable
         _speed = stats.ProjectileSpeed;
         _damage = stats.Damage;
         _attackRange = stats.AttackRange;
+        _lifeDuration = stats.ProjectileLifeDuration;
 
         _weapon = weapon;
 
@@ -48,7 +52,7 @@ public class Projectile : MonoBehaviour, IPoolable, IFixedUpdatable
         transform.LookAt(transform.position + direction);
 
         _moveDirection = direction.normalized;
-
+        _releaseTimer = 0f;
         _onThrow = true;
     }
 
@@ -57,6 +61,13 @@ public class Projectile : MonoBehaviour, IPoolable, IFixedUpdatable
         if (_onThrow)
         {
             Move();
+
+            _releaseTimer += Time.fixedDeltaTime;
+
+            if (_releaseTimer >= _lifeDuration.Value)
+            {
+                _weapon.OnProjectileRelease(this);
+            }
         }
     }
 

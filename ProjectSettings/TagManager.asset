@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - PlayerWeapon
+  - EnemyWeapon
+  - PlayerProjectile
+  - EnemyProjectile
+  - TargetDetector
   layers:
   - Default
   - TransparentFX

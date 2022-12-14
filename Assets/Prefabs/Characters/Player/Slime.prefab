@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3709672742462296917}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3840624724846604478}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!212 &7625322780729803048
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -93,11 +93,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3840624724846604478}
-  - component: {fileID: 3840624724846604464}
   - component: {fileID: 3840624724846604477}
+  - component: {fileID: 5585751141520105899}
+  - component: {fileID: 127472139562062061}
   m_Layer: 0
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,19 +120,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!135 &3840624724846604464
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3840624724846604465}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3840624724846604477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,9 +137,8 @@ MonoBehaviour:
     _sounds: []
   _isImmortal: 0
   _healthBar: {fileID: 3840624725537433936}
-  _startWeaponsList: []
   _stats:
-    _baseWeapon: {fileID: 0}
+    _baseWeapon: {fileID: 4952881487116878149, guid: 83cdceb10650dc544aac4d8f47c81f4a, type: 3}
     _health:
       _isDebug: 0
       _statData: {fileID: 11400000, guid: 20e97a7c3a48b1649b0235377153c2d3, type: 2}
@@ -165,9 +152,37 @@ MonoBehaviour:
       _isDebug: 0
       _statData: {fileID: 11400000, guid: b3b0f5100ace28f43929c83efabdaf14, type: 2}
   _abilityInventory:
-    _maxActiveAbilitiesCount: 0
-    _maxPassiveAbilitiesCount: 0
+    _maxActiveAbilitiesCount: 1
     _abilitiesParent: {fileID: 3840624724846604478}
+--- !u!65 &5585751141520105899
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840624724846604465}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 8}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &127472139562062061
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840624724846604465}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &3498500920422964074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -237,11 +252,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414770815392187344, guid: 63e4b22c45df6b24ba561b95ef736b79, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 414770815392187344, guid: 63e4b22c45df6b24ba561b95ef736b79, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 414770815392187344, guid: 63e4b22c45df6b24ba561b95ef736b79, type: 3}
       propertyPath: m_LocalRotation.y
@@ -257,11 +272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414770815392187344, guid: 63e4b22c45df6b24ba561b95ef736b79, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 414770815392187344, guid: 63e4b22c45df6b24ba561b95ef736b79, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 414770815392187344, guid: 63e4b22c45df6b24ba561b95ef736b79, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

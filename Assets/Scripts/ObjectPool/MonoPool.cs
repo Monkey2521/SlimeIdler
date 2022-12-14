@@ -21,6 +21,7 @@ public class MonoPool<TObject> : ObjectPool<TObject> where TObject : MonoBehavio
         }
 
         _objects = new List<TObject>(capacity);
+        _pulledObjects = new CleanupableList<TObject>();
 
         for (int i = 0; i < capacity; i++)
         {
@@ -44,9 +45,9 @@ public class MonoPool<TObject> : ObjectPool<TObject> where TObject : MonoBehavio
 
     public override void Release(TObject obj)
     {
-        base.Release(obj);
-
         if (obj != null) obj.gameObject.SetActive(false);
+
+        base.Release(obj);
     }
 
     public override TObject Pull()

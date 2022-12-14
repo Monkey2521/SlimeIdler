@@ -18,11 +18,13 @@ public class Player : CharacterBase
     
     protected MainInventory _mainInventory;
 
+    private void OnEnable()
+    {
+        Initialize();
+    }
+
     public void Initialize()
     {
-
-        List<Upgrade> equipmentUpgrades = new List<Upgrade>();
-
         _stats.Initialize();
 
         _healthBar?.Initialize(_stats.Health);
@@ -31,11 +33,6 @@ public class Player : CharacterBase
         _upgrades = new List<Upgrade>();
 
         GetAbility(_stats.BaseWeapon);
-        
-        foreach (Upgrade upgrade in equipmentUpgrades)
-        {
-            GetUpgrade(upgrade);
-        }
     }
 
     private void Update()

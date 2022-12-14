@@ -6,6 +6,7 @@ public class ProjectileAbilityStats : WeaponAbilityStats
     [Header("Projectiles settings")]
     [SerializeField] protected Projectile _projectilePrefab;
     [SerializeField] protected Radius _projectileSize;
+    [SerializeField] protected Duration _projectileLifeDuration;
 
     [Space(5)]
     [SerializeField] protected ProjectileSpeed _projectileSpeed;
@@ -14,6 +15,7 @@ public class ProjectileAbilityStats : WeaponAbilityStats
 
     public Projectile Projectile => _projectilePrefab;
     public Radius ProjectileSize => _projectileSize;
+    public Duration ProjectileLifeDuration => _projectileLifeDuration;
     public ProjectileNumber ProjectileNumber => _projectileNumber;
     public Cooldown ProjectilesSpawnInterval => _projectilesSpawnInterval;
     public ProjectileSpeed ProjectileSpeed => _projectileSpeed;
@@ -23,6 +25,7 @@ public class ProjectileAbilityStats : WeaponAbilityStats
         base.Initialize();
 
         _projectileSize.Initialize();
+        _projectileLifeDuration.Initialize();
         _projectileNumber.Initialize();
         _projectilesSpawnInterval.Initialize();
         _projectileSpeed.Initialize();
@@ -33,6 +36,7 @@ public class ProjectileAbilityStats : WeaponAbilityStats
         base.GetUpgrade(upgrade);
 
         _projectileSize.Upgrade(upgrade);
+        _projectileLifeDuration.Upgrade(upgrade);
         _projectileNumber.Upgrade(upgrade);
         _projectilesSpawnInterval.Upgrade(upgrade);
         _projectileSpeed.Upgrade(upgrade);
@@ -43,6 +47,7 @@ public class ProjectileAbilityStats : WeaponAbilityStats
         base.DispelUpgrade(upgrade);
 
         _projectileSize.DispelUpgrade(upgrade);
+        _projectileLifeDuration.DispelUpgrade(upgrade);
         _projectileNumber.DispelUpgrade(upgrade);
         _projectilesSpawnInterval.DispelUpgrade(upgrade);
         _projectileSpeed.DispelUpgrade(upgrade);

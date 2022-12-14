@@ -9,6 +9,7 @@ public abstract class AbilityContainer : MonoBehaviour, IUpgradeable
     [Header("Settings")]
     [SerializeField] protected string _name;
     [SerializeField] protected Sprite _icon;
+    [SerializeField] protected StatsAbilityUpgradeData _upgradeData;
 
     protected UpgradeList _upgrades;
 
@@ -18,8 +19,8 @@ public abstract class AbilityContainer : MonoBehaviour, IUpgradeable
     public Sprite Icon => _icon;
 
     public abstract AbilityStats Stats { get; }
-    public abstract Upgrade CurrentUpgrade { get; }
-    public abstract AbilityUpgradeData UpgradeData { get; }
+    public AbilityUpgradeData UpgradeData => _upgradeData;
+    public Upgrade CurrentUpgrade => _upgradeData.RepeatingUpgrade;
 
     public virtual void Initialize()
     {
@@ -30,14 +31,16 @@ public abstract class AbilityContainer : MonoBehaviour, IUpgradeable
 
     public virtual bool Upgrade(Upgrade upgrade)
     {
-        foreach (UpgradeData data in upgrade.Upgrades)
+        if (upgrade == null) return false;
+
+        if (upgrade.IsAbilityUpgrade && Stats.AbilityMarker.Equals(upgrade.AbilityMarker))
         {
-            _upgrades.Add(data);
+            Stats.Level.LevelUp();
+
+            return true;
         }
 
-        Stats.Level.LevelUp();
-            
-        return true;
+        return false;
     }
 
     public virtual void DispelUpgrade(Upgrade upgrade)
