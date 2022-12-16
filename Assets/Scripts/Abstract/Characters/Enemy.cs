@@ -3,12 +3,15 @@ using UnityEngine;
 public abstract class Enemy : CharacterBase, IPoolable, IUpdatable
 {
     [Header("Enemy settings")]
+    [SerializeField] private Currency _reward;
+    [SerializeField] private float _currencyRewardMultiplier = 3f;
     [SerializeField] protected CharacterStats _stats;
 
     protected Player _player = null; 
     protected MonoPool<Enemy> _pool = null;
 
     public override CharacterStats Stats => _stats;
+    public Currency Reward => _reward;
 
     protected void Awake()
     {
@@ -47,8 +50,11 @@ public abstract class Enemy : CharacterBase, IPoolable, IUpdatable
     public override void Die()
     {
         base.Die();
+        _stats.BaseWeapon.Cleanup();
 
         EventBus.Publish<IEnemyKilledHandler>(handler => handler.OnEnemyKilled(this));
+
+        _sounds.PlaySound(SoundTypes.Die);
 
         if (_pool != null)
         {
@@ -64,6 +70,14 @@ public abstract class Enemy : CharacterBase, IPoolable, IUpdatable
         }
     }
 
+    public override void GetUpgrade(Upgrade upgrade)
+    {
+        base.GetUpgrade(upgrade);
+        _stats.BaseWeapon.Upgrade(upgrade);
+
+        _reward = new Currency(_reward.CurrencyData, (int)(_reward.CurrencyValue * _currencyRewardMultiplier));
+    }
+
     public override void DispelUpgrade(Upgrade upgrade)
     {
         base.DispelUpgrade(upgrade);
@@ -74,7 +88,6 @@ public abstract class Enemy : CharacterBase, IPoolable, IUpdatable
     protected virtual void OnDisable()
     {
         EventBus.Publish<IObjectDisableHandler>(handler => handler?.OnObjectDisable(gameObject));
-        
         if (_isDebug) Debug.Log(name + " disabled");
     }
 }

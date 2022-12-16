@@ -27,14 +27,14 @@ public abstract class ProjectileWeapon : Weapon, IFixedUpdatable
 
     public override void Attack()
     {
-        if (_isReady)
+        if (_isReady && _targetDetector.Targets.Count > 0)
         {
             base.Attack();
 
             _isReady = false;
             _spawning = true;
             _spawnCount = 0;
-            _spawnIntervalTimer = _stats.ProjectilesSpawnInterval.Value;
+            _spawnIntervalTimer = 0;
         }
     }
 

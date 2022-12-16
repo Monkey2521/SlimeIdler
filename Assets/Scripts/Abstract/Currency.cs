@@ -9,7 +9,7 @@ public class Currency
     public Currency (CurrencyData data, int value)
     {
         _currencyData = data;
-        _currencyValue = value;
+        _currencyValue = value > 0 ? value : int.MaxValue;
     }
 
     public int CurrencyValue => _currencyValue;

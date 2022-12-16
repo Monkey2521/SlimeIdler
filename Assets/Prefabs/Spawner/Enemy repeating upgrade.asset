@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fb7d36c8cf5a44ba8f8df8afcf1377, type: 3}
+  m_Name: Enemy repeating upgrade
+  m_EditorClassIdentifier: 
+  _isAbilityUpgrade: 0
+  _abilityMarker: {fileID: 11400000, guid: c4ac7875f0c06284492b544d687b9a21, type: 2}
+  _upgrades:
+  - {fileID: 11400000, guid: e5c3dd3828756f74c8d793dc31a94da1, type: 2}
+  - {fileID: 11400000, guid: cde3fe3552fe62d46b4bdf0d4158a72f, type: 2}
+  - {fileID: 11400000, guid: ba5de36d3a508b640a57342665d93ac6, type: 2}
+  - {fileID: 11400000, guid: 38c3ccf4ac9ff134fa86a4bc7ebb93e7, type: 2}
+  - {fileID: 11400000, guid: a78e13f23ffe7f34ab32f5753dea9b67, type: 2}

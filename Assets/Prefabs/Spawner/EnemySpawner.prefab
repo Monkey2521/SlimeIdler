@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &635423980301068350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635423980301068351}
+  - component: {fileID: 635423980301068348}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &635423980301068351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635423980301068350}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &635423980301068348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635423980301068350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87cf1f78146cbce43a76f2ccc9787162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDebug: 0
+  _defaultEnemyPrefab: {fileID: 3499125442835339325, guid: ac7d89f88457a304697baaf68b21f025, type: 3}
+  _spawnDeltaPosition: 2
+  _stats:
+    _spawnInterval:
+      _isDebug: 0
+      _statData: {fileID: 11400000, guid: d18e4018e411a3e48b09336b0cff6e83, type: 2}
+    _enemySpawnInterval:
+      _isDebug: 0
+      _statData: {fileID: 11400000, guid: 5ea69766b93d33544886bffb61766007, type: 2}
+    _spawnNumber:
+      _isDebug: 0
+      _statData: {fileID: 11400000, guid: c6e850c7d3118124d8a6c856088371b8, type: 2}
+  _timeForUpgrade: 60
+  _repeatingUpgrade: {fileID: 11400000, guid: 171ba0a2465bbde469f91297855cd0dd, type: 2}
+  _player: {fileID: 0}

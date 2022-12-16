@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de10bd6cb7e6454e89c52a3084213a3, type: 3}
   m_Name: SlimeShooter AttackInterval
   m_EditorClassIdentifier: 
-  _baseValue: 2
+  _baseValue: 1.8
   _minValue: 0.1
-  _maxValue: 2
-  _maxValueIsInfinite: 0
+  _maxValue: 1.8
+  _maxValueIsInfinite: 1
   _upgradeMarkers:
     _markers:
     - {fileID: 11400000, guid: 0b5e57799e350844086365b80d818f23, type: 2}

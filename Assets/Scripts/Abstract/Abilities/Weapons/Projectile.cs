@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour, IPoolable, IFixedUpdatable
     [SerializeField] protected bool _isDebug;
 
     [Header("Throw settings")]
+    [SerializeField] protected TrailRenderer _trailRenderer;
     [SerializeField] protected TagList _targetTags;
     [SerializeField] protected SoundList _sounds;
 
@@ -37,6 +38,7 @@ public class Projectile : MonoBehaviour, IPoolable, IFixedUpdatable
 
     public virtual void Initialize(ProjectileAbilityStats stats, ProjectileWeapon weapon)
     {
+        _trailRenderer.Clear();
         _speed = stats.ProjectileSpeed;
         _damage = stats.Damage;
         _attackRange = stats.AttackRange;
@@ -89,6 +91,8 @@ public class Projectile : MonoBehaviour, IPoolable, IFixedUpdatable
             if (_isDebug) Debug.Log(name + " find target");
 
             obj.TakeDamage((int)_damage.Value);
+
+            _sounds.PlaySound(SoundTypes.ProjectileDestroy);
 
             _weapon.OnProjectileRelease(this);
         }

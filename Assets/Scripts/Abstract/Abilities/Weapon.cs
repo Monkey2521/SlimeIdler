@@ -20,7 +20,12 @@ public abstract class Weapon : AbilityContainer, IUpdatable
         _targetDetector.Initialize((Stats as WeaponAbilityStats).AttackRange);
     }
 
-    public virtual void Attack() // need override
+    public void Cleanup()
+    {
+        _targetDetector.Cleanup(true);
+    }
+
+    public virtual void Attack()
     {
         if (_isDebug) Debug.Log(name + " attacks");
     }

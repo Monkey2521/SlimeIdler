@@ -1,11 +1,12 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : CharacterBase
 {
     [Header("Stats settings")]
     [SerializeField] protected CharacterStats _stats;
+    [SerializeField] protected Text _damageText;
 
     [Header("Inventory settings")]
     [SerializeField] protected AbilityInventory _abilityInventory;
@@ -13,26 +14,29 @@ public class Player : CharacterBase
     protected List<Upgrade> _upgrades;
 
     public override CharacterStats Stats => _stats;
-
     public AbilityInventory AbilityInventory => _abilityInventory;
-    
-    protected MainInventory _mainInventory;
-
-    private void OnEnable()
-    {
-        Initialize();
-    }
 
     public void Initialize()
     {
         _stats.Initialize();
 
         _healthBar?.Initialize(_stats.Health);
+
+        if (_abilityInventory.Abilities != null)
+        {
+            while (_abilityInventory.Abilities.Count > 0)
+            {
+                _abilityInventory.Remove(_abilityInventory.Abilities[0]);
+            }
+        }
+
         _abilityInventory.Initialize();
 
         _upgrades = new List<Upgrade>();
 
         GetAbility(_stats.BaseWeapon);
+
+        _damageText.text = (_abilityInventory.Weapons[0].Stats as WeaponAbilityStats).Damage.Value.ToString();
     }
 
     private void Update()
@@ -69,6 +73,8 @@ public class Player : CharacterBase
         }
 
         _upgrades.Add(upgrade);
+
+        _damageText.text = (_abilityInventory.Weapons[0].Stats as WeaponAbilityStats).Damage.Value.ToString();
     }
 
     public AbilityContainer GetAbility(AbilityContainer ability)
@@ -126,6 +132,6 @@ public class Player : CharacterBase
     {
         base.Die();
 
-        EventBus.Publish<IPlayerDieHandler>(handler => handler.OnPlayerDie());
+        EventBus.Publish<IGameOverHandler>(handler => handler.OnGameOver());
     }
 }

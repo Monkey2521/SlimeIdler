@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class CurrencyInventory : Inventory
 {
+    [SerializeField] protected CurrencyUI _counter;
     [SerializeField] protected CurrencyData _currencyData;
 
     [SerializeField] protected Currency _baseValue;
@@ -21,7 +22,7 @@ public class CurrencyInventory : Inventory
     public virtual void Initialize()
     {
         _total = 0;
-
+        _counter?.Initialize(this);
     }
 
     public virtual void Add(Currency currency)
@@ -29,6 +30,7 @@ public class CurrencyInventory : Inventory
         if (currency.CurrencyData.Equals(_currencyData))
         {
             _total += currency.CurrencyValue;
+            _counter?.UpdateCounter();
         }
         else return;
     }
@@ -38,6 +40,7 @@ public class CurrencyInventory : Inventory
         if (IsEnough(currency))
         {
             _total -= currency.CurrencyValue;
+            _counter?.UpdateCounter();
 
             return true;
         }
@@ -58,6 +61,7 @@ public class CurrencyInventory : Inventory
                 if (data.UpgradingMarkers.IsStrike(_currencyData.Marker))
                 {
                     _total = (int)((_total + data.UpgradeValue) * data.UpgradeMultiplier);
+                    _counter?.UpdateCounter();
                 }
             }
         }
@@ -78,16 +82,19 @@ public class CurrencyInventory : Inventory
         if (data == null)
         {
             _total = _baseValue.CurrencyValue;
+            _counter?.UpdateCounter();
 
             return;
         }
 
         _total = (data as CurrencyInventoryData).total;
+        _counter?.UpdateCounter();
     }
 
     public override void ResetData()
     {
         _total = 0;
+        _counter?.UpdateCounter();
     }
 
     [System.Serializable]

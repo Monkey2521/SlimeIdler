@@ -11,6 +11,7 @@ public abstract class DamageableObject : MonoBehaviour, IDamageable
     [Header("Health settings")]
     [SerializeField] protected bool _isImmortal;
     [SerializeField] protected HPBar _healthBar;
+    [SerializeField] protected DamageCanvas _damageCanvas;
 
     public bool IsImmortal => _isImmortal;
     public abstract int HP { get; }
@@ -21,6 +22,7 @@ public abstract class DamageableObject : MonoBehaviour, IDamageable
         if (_isDebug) Debug.Log(name + " take " + damage + " damage");
 
         _healthBar?.UpdateHealth();
+        _damageCanvas?.ShowDamage(damage);
 
         if (HP <= 0 && !_isImmortal)
         {

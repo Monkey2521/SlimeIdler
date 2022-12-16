@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using UnityEngine;
 
-public class MainInventory : MonoBehaviour
+public class MainInventory : MonoBehaviour, IEnemyKilledHandler
 {
     [Header("Debug settings")]
     [SerializeField] private bool _isDebug;
@@ -11,25 +9,34 @@ public class MainInventory : MonoBehaviour
     [Header("Inventories settings")]
     [SerializeField] private CurrencyInventory _coinInventory;
     [SerializeField] private CurrencyInventory _gemsInventory;
-    [SerializeField] private EquipmentInventory _equipmentInventory;
+    //[SerializeField] private EquipmentInventory _equipmentInventory;
 
     public CurrencyInventory CoinInventory => _coinInventory;
     public CurrencyInventory GemsInventory => _gemsInventory;
-    public EquipmentInventory EquipmentInventory => _equipmentInventory;
+    //public EquipmentInventory EquipmentInventory => _equipmentInventory;
 
     private void OnEnable()
     {
+        EventBus.Subscribe(this);
+
         _coinInventory.Initialize();
         _gemsInventory.Initialize();
 
-        _equipmentInventory.Initialize();
+        //_equipmentInventory.Initialize();
 
         LoadData();
     }
 
     private void OnDisable()
     {
+        EventBus.Unsubscribe(this);
+
         SaveData();
+    }
+
+    public void OnEnemyKilled(Enemy enemy)
+    {
+        Add(enemy.Reward);
     }
 
     #region Serialization
@@ -38,7 +45,7 @@ public class MainInventory : MonoBehaviour
     {
         _coinInventory.LoadData(DataPath.Load(DataPath.CoinsInventory));
         _gemsInventory.LoadData(DataPath.Load(DataPath.GemsInvneotry));
-        _equipmentInventory.LoadData(DataPath.Load(DataPath.EquipmentInventory));
+        //_equipmentInventory.LoadData(DataPath.Load(DataPath.EquipmentInventory));
     }
 
     [ContextMenu("Save data")]
@@ -46,7 +53,7 @@ public class MainInventory : MonoBehaviour
     {
         DataPath.Save(DataPath.CoinsInventory, _coinInventory.SaveData());
         DataPath.Save(DataPath.GemsInvneotry, _gemsInventory.SaveData());
-        DataPath.Save(DataPath.EquipmentInventory, _equipmentInventory.SaveData());
+        //DataPath.Save(DataPath.EquipmentInventory, _equipmentInventory.SaveData());
     }
 
     [ContextMenu("Reset data")]
@@ -68,13 +75,13 @@ public class MainInventory : MonoBehaviour
             if (_isDebug) Debug.Log("Reset GemsInvneotry");
         }
         
-        if (File.Exists(DataPath.EquipmentInventory))
+        /*if (File.Exists(DataPath.EquipmentInventory))
         {
             File.Delete(DataPath.EquipmentInventory);
             _equipmentInventory.ResetData();
 
             if (_isDebug) Debug.Log("Reset EquipmentInventory");
-        }
+        }*/
     }
     #endregion
 

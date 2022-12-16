@@ -13,11 +13,12 @@ public class MonoPool<TObject> : ObjectPool<TObject> where TObject : MonoBehavio
     public MonoPool(TObject prefab, int capacity, Transform poolParent = null)
     {
         _prefab = prefab;
+
         _parent = new GameObject(prefab.name + " pool").transform;
 
         if (poolParent != null)
         {
-            _parent.transform.parent = poolParent;
+            _parent.parent = poolParent;
         }
 
         _objects = new List<TObject>(capacity);
@@ -88,10 +89,13 @@ public class MonoPool<TObject> : ObjectPool<TObject> where TObject : MonoBehavio
 
     public override void ClearPool()
     {
-        Object.Destroy(_parent.gameObject);
+        if (_parent != null)
+        {
+            Object.Destroy(_parent.gameObject);
 
-        _parent = null;
+            _parent = null;
 
-        base.ClearPool();
+            base.ClearPool();
+        }
     }
 }

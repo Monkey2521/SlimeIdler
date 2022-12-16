@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class TargetDetector : TriggerDetector, IObjectDisableHandler
 {
@@ -121,7 +120,7 @@ public class TargetDetector : TriggerDetector, IObjectDisableHandler
 
         if (position == -Vector3.one)
         {
-            return transform.TransformDirection(Vector3.forward);
+            return transform.TransformDirection(Vector3.right);
         }
 
         position.y = transform.position.y;
